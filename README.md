@@ -90,6 +90,25 @@ curl -X POST http://localhost:8000/predict \
   -d '{"date":"2025-12-31","state":"WA","suburb":"Perth","postcode":"6000","bedrooms":2,"dwelling_type":"unit"}'
 ```
 
+## Frontend (React)
+The frontend lives in `frontend/` and uses Vite.
+
+Install dependencies:
+```bash
+cd frontend
+npm install
+```
+
+Run the dev server:
+```bash
+npm run dev
+```
+
+Optional API base override:
+```bash
+VITE_API_BASE=http://localhost:8000 npm run dev
+```
+
 ## Notes on leakage prevention
 - Features are computed in date order by suburb.
 - Lagged rent features use only prior periods (shifted by 1).
