@@ -1,0 +1,35 @@
+{
+  "categorical_cols": [
+    "suburb",
+    "state",
+    "dwelling_type",
+    "postcode"
+  ],
+  "numeric_cols": [
+    "bedrooms",
+    "year",
+    "quarter",
+    "suburb_rent_lag1",
+    "rolling_suburb_median_4"
+  ],
+  "feature_cols": [
+    "suburb",
+    "state",
+    "dwelling_type",
+    "postcode",
+    "bedrooms",
+    "year",
+    "quarter",
+    "suburb_rent_lag1",
+    "rolling_suburb_median_4"
+  ],
+  "numeric_medians": {
+    "bedrooms": 2.0,
+    "year": 2025.0,
+    "quarter": 1.0,
+    "suburb_rent_lag1": 460.0,
+    "rolling_suburb_median_4": 462.0
+  },
+  "target_col": "weekly_rent",
+  "date_col": "date"
+}

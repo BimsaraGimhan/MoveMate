@@ -1,0 +1,148 @@
+"openapi": "3.1.0"
+"info":
+  "title": "MoveMate Rent Prediction API"
+  "version": "1.0.0"
+"paths":
+  "/health":
+    "get":
+      "summary": "Health"
+      "operationId": "health_health_get"
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "additionalProperties":
+                  "type": "string"
+                "type": "object"
+                "title": "Response Health Health Get"
+  "/predict":
+    "post":
+      "summary": "Predict One"
+      "operationId": "predict_one_predict_post"
+      "requestBody":
+        "content":
+          "application/json":
+            "schema":
+              "$ref": "#/components/schemas/RentRequest"
+        "required": true
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "$ref": "#/components/schemas/RentResponse"
+        "422":
+          "description": "Validation Error"
+          "content":
+            "application/json":
+              "schema":
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/predict-batch":
+    "post":
+      "summary": "Predict Batch"
+      "operationId": "predict_batch_predict_batch_post"
+      "requestBody":
+        "content":
+          "application/json":
+            "schema":
+              "items":
+                "$ref": "#/components/schemas/RentRequest"
+              "type": "array"
+              "title": "Payloads"
+        "required": true
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "items":
+                  "$ref": "#/components/schemas/RentResponse"
+                "type": "array"
+                "title": "Response Predict Batch Predict Batch Post"
+        "422":
+          "description": "Validation Error"
+          "content":
+            "application/json":
+              "schema":
+                "$ref": "#/components/schemas/HTTPValidationError"
+"components":
+  "schemas":
+    "HTTPValidationError":
+      "properties":
+        "detail":
+          "items":
+            "$ref": "#/components/schemas/ValidationError"
+          "type": "array"
+          "title": "Detail"
+      "type": "object"
+      "title": "HTTPValidationError"
+    "RentRequest":
+      "properties":
+        "date":
+          "type": "string"
+          "title": "Date"
+          "description": "ISO date like 2025-12-31"
+        "state":
+          "type": "string"
+          "title": "State"
+        "suburb":
+          "type": "string"
+          "title": "Suburb"
+        "postcode":
+          "type": "string"
+          "title": "Postcode"
+        "bedrooms":
+          "type": "integer"
+          "title": "Bedrooms"
+        "dwelling_type":
+          "type": "string"
+          "title": "Dwelling Type"
+      "type": "object"
+      "required":
+        - "date"
+        - "state"
+        - "suburb"
+        - "postcode"
+        - "bedrooms"
+        - "dwelling_type"
+      "title": "RentRequest"
+    "RentResponse":
+      "properties":
+        "prediction_catboost":
+          "type": "number"
+          "title": "Prediction Catboost"
+        "prediction_baseline":
+          "type": "number"
+          "title": "Prediction Baseline"
+      "type": "object"
+      "required":
+        - "prediction_catboost"
+        - "prediction_baseline"
+      "title": "RentResponse"
+    "ValidationError":
+      "properties":
+        "loc":
+          "items":
+            "anyOf":
+              -
+                "type": "string"
+              -
+                "type": "integer"
+          "type": "array"
+          "title": "Location"
+        "msg":
+          "type": "string"
+          "title": "Message"
+        "type":
+          "type": "string"
+          "title": "Error Type"
+      "type": "object"
+      "required":
+        - "loc"
+        - "msg"
+        - "type"
+      "title": "ValidationError"
